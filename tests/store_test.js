@@ -1,9 +1,8 @@
 let registrationUser = {
-    firstName: 'Kate',
-    lastName: '3',
-    telephoneNumber: '+38096578965',
-    password: 'Temp12345',
-    passwordConfirm: 'Temp12345', 
+    firstName: 'Katuysha',
+    lastName: '12',
+    telephoneNumber: '+38096578934',
+    password: 'Temp12356', 
 };
 
 Feature('store');
@@ -17,6 +16,5 @@ Scenario('test something', ({ I, homePage, registerPage }) => {
     registerPage.clickSubscribeYesButton();
     registerPage.clickAgreePolicyButton();
     registerPage.clickContinueOnRegisterPageButton();
-    I.see('Your Account Has Been Created!');
-    pause();
-});
+    registerPage.verifySuccessfulRegistrationText();
+}).tag('store');

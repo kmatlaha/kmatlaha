@@ -11,7 +11,7 @@ module.exports = {
   subscribeYesButton: {xpath: '//*[@id="content"]/form/fieldset[3]/div/div/label[1]'},
   readAndAgreePolicyButton: {xpath: '//*[@id="content"]/form/div/div/input[1]'},
   continueOnRegisterPageButton: {xpath: '//*[@id="content"]/form/div/div/input[2]'},
-  
+  successfulRegistrationText: 'Your Account Has Been Created!',
 
   verifyRegisterAccountText() {
     I.see(this.registerHeaderText);
@@ -23,7 +23,7 @@ module.exports = {
     I.fillField(this.emailField, user.email);
     I.fillField(this.telephoneNumberField, user.telephoneNumber);
     I.fillField(this.passwordField, user.password);
-    I.fillField(this.passwordConfirmField, user.passwordConfirm);
+    I.fillField(this.passwordConfirmField, user.password);
   },
 
   clickSubscribeYesButton() {
@@ -36,5 +36,9 @@ module.exports = {
 
   clickContinueOnRegisterPageButton() {
     I.click(this.continueOnRegisterPageButton);
-  }
+  },
+
+  verifySuccessfulRegistrationText() {
+    I.see(this.successfulRegistrationText);
+  },
 }
