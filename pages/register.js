@@ -3,14 +3,14 @@ const { I } = inject();
 module.exports = {
   registerHeaderText: 'Register Account',
   firstNameField: { css: '#input-firstname' },
-  lastNameField: {css: '#input-lastname'},
-  emailField: {css: '#input-email' },
-  telephoneNumberField: {css: '#input-telephone'},
-  passwordField: {css: '#input-password'},
-  passwordConfirmField: {css: '#input-confirm'},
-  subscribeYesButton: {xpath: '//*[@id="content"]/form/fieldset[3]/div/div/label[1]'},
-  readAndAgreePolicyButton: {xpath: '//*[@id="content"]/form/div/div/input[1]'},
-  continueOnRegisterPageButton: {xpath: '//*[@id="content"]/form/div/div/input[2]'},
+  lastNameField: { css: '#input-lastname' },
+  emailField: { css: '#input-email' },
+  telephoneNumberField: { css: '#input-telephone' },
+  passwordField: { css: '#input-password' },
+  passwordConfirmField: { css: '#input-confirm' },
+  subscribeYesButton: { xpath: '//*[@id="content"]/form/fieldset[3]/div/div/label[1]' },
+  readAndAgreePolicyButton: { xpath: '//*[@id="content"]/form/div/div/input[1]' },
+  continueOnRegisterPageButton: { xpath: '//*[@id="content"]/form/div/div/input[2]' },
   successfulRegistrationText: 'Your Account Has Been Created!',
 
   verifyRegisterAccountText() {

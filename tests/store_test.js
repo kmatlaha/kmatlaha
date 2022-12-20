@@ -1,8 +1,8 @@
 let registrationUser = {
     firstName: 'Katuysha',
-    lastName: '12',
+    lastName: '11',
     telephoneNumber: '+38096578934',
-    password: 'Temp12356', 
+    password: 'Temp12356',
 };
 
 Feature('store');

@@ -7,5 +7,4 @@ module.exports = {
     I.click(this.myAccountSpoiler);
     I.click(this.registerLink);
   }
-  // insert your locators and methods here
 }

@@ -1,21 +1,18 @@
-const { newBillingAddressButton, regionStateButton, regionSelectorChoice, continueOnCheckoutPageButton, continueForDeliveryDetails, continueDeliveryMethodButton, termsAndConditionsAgreementButton, continueForPaymentMethod, confirmOrderButtonOnCheckoutPage } = require("../pages/checkout");
-const { addToCartButton, basketButton, checkoutButton } = require("../pages/product");
 
 let loginUser = {
     email: 'testkateqa96@gmail.com',
-    password: 'Temp1234567890', 
+    password: 'Temp1234567890',
 };
 
 let billingDetails = {
     firstName: 'Kate',
-    lastName: 'Temp', 
+    lastName: 'Temp',
     company: 'Kates',
     address1: 'Alabama1',
     address2: 'Alyasje4',
     city: 'Mandarin',
     postcode: 'A1A1A1',
 };
-
 
 Feature('buy product');
 
@@ -27,19 +24,11 @@ Scenario('buy product', async ({ I, productPage, checkoutPage }) => {
     console.log(price);
     let priceWithColor = await productPage.getProductPriceWithChosenColor();
     console.log(priceWithColor);
-    productPage.clickButton(addToCartButton);
-    productPage.clickButton(basketButton);
-    productPage.clickButton(checkoutButton);
+    productPage.addProductToCart();
     checkoutPage.verifyCheckoutPageText();
     checkoutPage.clickButton(newBillingAddressButton);
     checkoutPage.fillCheckoutDetails(billingDetails);
-    checkoutPage.clickButton(regionStateButton);
-    checkoutPage.clickButton(regionSelectorChoice);
-    checkoutPage.clickButton(continueOnCheckoutPageButton);
-    checkoutPage.clickButton(continueForDeliveryDetails);
-    checkoutPage.clickButton(continueDeliveryMethodButton);
-    checkoutPage.clickButton(termsAndConditionsAgreementButton);
-    checkoutPage.clickButton(continueForPaymentMethod);
+    checkoutPage.clickButtonsByStepsOnCheckoutForm();
     let flatShippingRatePrice = await checkoutPage.getFlatShippingRatePrice();
     console.log(flatShippingRatePrice);
     let ecoTaxPrice = await checkoutPage.getEcoTaxPrice();
@@ -50,10 +39,8 @@ Scenario('buy product', async ({ I, productPage, checkoutPage }) => {
     console.log(totalPrice);
     checkoutPage.clickButton(confirmOrderButtonOnCheckoutPage);
     checkoutPage.successfulOrderTextCheck();
-    I.assertEqual(price+priceWithColor+flatShippingRatePrice+ecoTaxPrice+vatPrice,totalPrice,'not equal');
-    checkoutPage.clickMyAccountButton();
-    checkoutPage.clickOrderHistoryButton();
+    I.assertEqual(price + priceWithColor + flatShippingRatePrice + ecoTaxPrice + vatPrice, totalPrice, 'not equal');
+    checkoutPage.idOfLastOrderCheck();
     let lastOrderID = await checkoutPage.getOrderIdText();
     console.log(lastOrderID);
-    pause();
 }).tag('buy');
