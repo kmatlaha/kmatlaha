@@ -21,18 +21,14 @@ flatShippingRatePriceText: {xpath: '//*[@id="collapse-checkout-confirm"]/div/div
 ecoTaxPriceText: {xpath: '//*[@id="collapse-checkout-confirm"]/div/div[1]/table/tfoot/tr[3]/td[2]'},
 vatPriceText: {xpath: '//*[@id="collapse-checkout-confirm"]/div/div[1]/table/tfoot/tr[4]/td[2]'},
 totalPriceText: {xpath: '//*[@id="collapse-checkout-confirm"]/div/div[1]/table/tfoot/tr[5]/td[2]'},
-confirmOrderButton: {xpath: '//*[@id="button-confirm"]'},
-successfulOrderText: 'Your order has been placed!',
+confirmOrderButtonOnCheckoutPage: {xpath: '//*[@id="button-confirm"]'},
+successfulOrderTextForSuccess: 'Your order has been placed!',
 orderIdText: {xpath: '//*[@id="content"]/div[1]/table/tbody/tr[1]/td[1]'},
-myAccountButton: {xpath: '//*[@id="top-links"]/ul/li/span/span'},
-orderHistoryButton: {xpath: '//*[@id="top-links"]/ul/li/ul/li[2]/a'},
+myAccountButtonOnTopPanel: {xpath: '//*[@id="top-links"]/ul/li/span/span'},
+orderHistoryButtonInMyAccountDropdown: {xpath: '//*[@id="top-links"]/ul/li/ul/li[2]/a'},
 
 verifyCheckoutPageText() {
   I.see(this.checkoutHeaderText);
-},
-
-newBillingAddressButtonClick() {
-  I.click(this.newBillingAddressButton);
 },
 
 fillCheckoutDetails(billingDetails) {
@@ -45,79 +41,40 @@ fillCheckoutDetails(billingDetails) {
   I.fillField(this.postcodeBillingField,billingDetails.postcode);
 },
 
-clickregionStateButton() {
-I.click(this.regionStateButton);
-},
-
-clickregionSelectorChoice() {
-  I.click(this.regionSelectorChoice);
-},
-
-clickContinueButtonOnCheckoutPage() {
-  I.click(this.continueOnCheckoutPageButton);
-},
-
-clickContinueForDeliveryDetails() {
-  I.click(this.continueForDeliveryDetails);
-},
-
-clickContinueDeliveryMethodButton() {
-  I.click(this.continueDeliveryMethodButton);
-},
-
-clickTermsAndConditionsAgreementButton() {
-  I.click(this.termsAndConditionsAgreementButton);
-},
-
-clickContinueForPaymentMethod() {
-  I.click(this.continueForPaymentMethod);
+clickButton(nameOfButton) {
+  I.click(nameOfButton);
 },
 
 async getFlatShippingRatePrice() {
-  return this.parsedInNum(await I.grabTextFrom(this.flatShippingRatePriceText));
+  return I.parseStringToFloat(await I.grabTextFrom(this.flatShippingRatePriceText));
 },
 
 async getEcoTaxPrice() {
-  return this.parsedInNum(await I.grabTextFrom(this.ecoTaxPriceText));
+  return I.parseStringToFloat(await I.grabTextFrom(this.ecoTaxPriceText));
 },
 
 async getVatPrice() {
-  return this.parsedInNum(await I.grabTextFrom(this.vatPriceText));
+  return I.parseStringToFloat(await I.grabTextFrom(this.vatPriceText));
 },
 
 async getTotalPrice() {
-  return this.parsedInNum(await I.grabTextFrom(this.totalPriceText));
-},
-
-parsedInNum(str){
-  let check = false , temp = "";
-    for(let i=0; i<str.length; i++) {
-      if(check) temp += str[i];
-      if (str[i] == '$') check = true;
-    }   
-    return str = parseFloat(temp);
-},
-
-
-clickConfirmOrderButton() {
-  I.click(this.confirmOrderButton);
+  return I.parseStringToFloat(await I.grabTextFrom(this.totalPriceText));
 },
 
 successfulOrderTextCheck() {
-  I.see(this.successfulOrderText);
+  I.see(this.successfulOrderTextForSuccess);
 },
 
 clickMyAccountButton() {
-  I.click(this.myAccountButton);
+  I.click(this.myAccountButtonOnTopPanel);
 },
 
 clickOrderHistoryButton() {
-  I.click(this.orderHistoryButton);
+  I.click(this.orderHistoryButtonInMyAccountDropdown);
 },
 
 async getOrderIdText() {
   return await I.grabTextFrom(this.orderIdText);
 },
 
-  // insert your locators and methods here
 }

@@ -1,3 +1,6 @@
+const { newBillingAddressButton, regionStateButton, regionSelectorChoice, continueOnCheckoutPageButton, continueForDeliveryDetails, continueDeliveryMethodButton, termsAndConditionsAgreementButton, continueForPaymentMethod, confirmOrderButtonOnCheckoutPage } = require("../pages/checkout");
+const { addToCartButton, basketButton, checkoutButton } = require("../pages/product");
+
 let loginUser = {
     email: 'testkateqa96@gmail.com',
     password: 'Temp1234567890', 
@@ -24,19 +27,19 @@ Scenario('buy product', async ({ I, productPage, checkoutPage }) => {
     console.log(price);
     let priceWithColor = await productPage.getProductPriceWithChosenColor();
     console.log(priceWithColor);
-    productPage.clickAddToCartButton();
-    productPage.clickBusketButton();
-    productPage.checkoutButtonClick();
+    productPage.clickButton(addToCartButton);
+    productPage.clickButton(basketButton);
+    productPage.clickButton(checkoutButton);
     checkoutPage.verifyCheckoutPageText();
-    checkoutPage.newBillingAddressButtonClick();
+    checkoutPage.clickButton(newBillingAddressButton);
     checkoutPage.fillCheckoutDetails(billingDetails);
-    checkoutPage.clickregionStateButton();
-    checkoutPage.clickregionSelectorChoice();
-    checkoutPage.clickContinueButtonOnCheckoutPage();
-    checkoutPage.clickContinueForDeliveryDetails();
-    checkoutPage.clickContinueDeliveryMethodButton();
-    checkoutPage.clickTermsAndConditionsAgreementButton();
-    checkoutPage.clickContinueForPaymentMethod();
+    checkoutPage.clickButton(regionStateButton);
+    checkoutPage.clickButton(regionSelectorChoice);
+    checkoutPage.clickButton(continueOnCheckoutPageButton);
+    checkoutPage.clickButton(continueForDeliveryDetails);
+    checkoutPage.clickButton(continueDeliveryMethodButton);
+    checkoutPage.clickButton(termsAndConditionsAgreementButton);
+    checkoutPage.clickButton(continueForPaymentMethod);
     let flatShippingRatePrice = await checkoutPage.getFlatShippingRatePrice();
     console.log(flatShippingRatePrice);
     let ecoTaxPrice = await checkoutPage.getEcoTaxPrice();
@@ -45,7 +48,7 @@ Scenario('buy product', async ({ I, productPage, checkoutPage }) => {
     console.log(vatPrice);
     let totalPrice = await checkoutPage.getTotalPrice();
     console.log(totalPrice);
-    checkoutPage.clickConfirmOrderButton();
+    checkoutPage.clickButton(confirmOrderButtonOnCheckoutPage);
     checkoutPage.successfulOrderTextCheck();
     I.assertEqual(price+priceWithColor+flatShippingRatePrice+ecoTaxPrice+vatPrice,totalPrice,'not equal');
     checkoutPage.clickMyAccountButton();

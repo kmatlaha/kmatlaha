@@ -20,9 +20,12 @@ module.exports = function() {
       this.click(submitButton);
 
 
-    }
-    // Define custom steps here, use 'this' to access default methods of I.
-    // It is recommended to place a general 'login' function here.
+    },
 
+    parseStringToFloat(str){
+      return parseFloat(str.replaceAll(/[^0-9\.]+/g, ''));
+},
+
+    
   });
 }

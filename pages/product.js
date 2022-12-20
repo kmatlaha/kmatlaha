@@ -9,36 +9,17 @@ module.exports = {
   checkoutButton: {xpath: '//div[@class="cart toggle-wrap"]/ul/li[3]/div/a[2]'},
 
   async getProductPrice() {
-    return this.parsedInNum(await I.grabTextFrom(this.priceText));
+    return I.parseStringToFloat(await I.grabTextFrom(this.priceText));
   },
 
   async getProductPriceWithChosenColor() {
     I.click(this.colorPriceButton);
     I.click(this.colorChoosePress);
-    return this.parsedInNum(await I.grabTextFrom(this.colorChoosePress));
+    return I.parseStringToFloat(await I.grabTextFrom(this.colorChoosePress));
   },
   
-  parsedInNum(str){
-    let check = false , temp = "";
-      for(let i=0; i<str.length; i++) {
-        if(check) temp += str[i];
-        if (str[i] == '$') check = true;
-      }   
-      return str = parseFloat(temp);
-  },
-  
-  clickAddToCartButton(){
-    I.click(this.addToCartButton);
+  clickButton(nameOfButton) {
+    I.click(nameOfButton);
   },
 
-  clickBusketButton() {
-    I.click(this.basketButton);
-  },
-
-  checkoutButtonClick(){
-    I.click(this.checkoutButton);
-  }
-
-
-  // insert your locators and methods here
 }
