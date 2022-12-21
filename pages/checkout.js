@@ -29,6 +29,10 @@ module.exports = {
     I.see(this.checkoutHeaderText);
   },
 
+  clickNewBillingAddressButton(){
+    I.click(this.newBillingAddressButton);
+  },
+
   fillCheckoutDetails(billingDetails) {
     I.fillField(this.firstNameBillingField, billingDetails.firstName);
     I.fillField(this.lastNameBillingField, billingDetails.lastName);
@@ -49,10 +53,6 @@ module.exports = {
     I.click(this.continueForPaymentMethod);
   },
 
-  clickButton(nameOfButton) {
-    I.click(nameOfButton);
-  },
-
   async getFlatShippingRatePrice() {
     return I.parseStringToFloat(await I.grabTextFrom(this.flatShippingRatePriceText));
   },
@@ -67,6 +67,10 @@ module.exports = {
 
   async getTotalPrice() {
     return I.parseStringToFloat(await I.grabTextFrom(this.totalPriceText));
+  },
+
+  clickConfirmOrderButtonOnCheckoutPage() {
+    I.click(this.confirmOrderButtonOnCheckoutPage);
   },
 
   checkTextOfSuccessfulOrder() {

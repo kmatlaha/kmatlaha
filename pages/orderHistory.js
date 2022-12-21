@@ -6,10 +6,6 @@ module.exports = {
   myAccountButtonOnTopPanel: { xpath: '//*[@id="top-links"]/ul/li/span/span' },
   orderHistoryButtonInMyAccountDropdown: { xpath: '//*[@id="top-links"]/ul/li/ul/li[2]/a' },
 
-  clickButton(nameOfButton) {
-    I.click(nameOfButton);
-  },
-
   checkIdOfLastOrder() {
     I.click(this.myAccountButtonOnTopPanel);
     I.click(this.orderHistoryButtonInMyAccountDropdown);

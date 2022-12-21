@@ -28,7 +28,7 @@ Scenario('buy product', async ({ I, productPage, checkoutPage, orderHistoryPage 
     console.log(priceWithColor);
     productPage.addProductToCart();
     checkoutPage.verifyCheckoutPageText();
-    checkoutPage.clickButton(newBillingAddressButton);
+    checkoutPage.clickNewBillingAddressButton();
     checkoutPage.fillCheckoutDetails(billingDetails);
     checkoutPage.clickButtonsByStepsOnCheckoutForm();
     let flatShippingRatePrice = await checkoutPage.getFlatShippingRatePrice();
@@ -39,7 +39,7 @@ Scenario('buy product', async ({ I, productPage, checkoutPage, orderHistoryPage 
     console.log(vatPrice);
     let totalPrice = await checkoutPage.getTotalPrice();
     console.log(totalPrice);
-    checkoutPage.clickButton(confirmOrderButtonOnCheckoutPage);
+    checkoutPage.clickConfirmOrderButtonOnCheckoutPage();
     checkoutPage.checkTextOfSuccessfulOrder();
     I.assertEqual(price + priceWithColor + flatShippingRatePrice + ecoTaxPrice + vatPrice, totalPrice, 'not equal');
     orderHistoryPage.checkIdOfLastOrder();
