@@ -1,4 +1,5 @@
-
+const { newBillingAddressButton, confirmOrderButtonOnCheckoutPage } = require("../pages/checkout");
+const orderHistory = require("../pages/orderHistory");
 
 let loginUser = {
     email: 'testkateqa96@gmail.com',
@@ -17,7 +18,7 @@ let billingDetails = {
 
 Feature('buy product');
 
-Scenario('buy product', async ({ I, productPage, checkoutPage }) => {
+Scenario('buy product', async ({ I, productPage, checkoutPage, orderHistoryPage }) => {
     I.login(loginUser);
     I.see('My Account');
     I.amOnPage('http://opencart.qatestlab.net/index.php?route=product/product&path=32&product_id=43');
@@ -41,7 +42,7 @@ Scenario('buy product', async ({ I, productPage, checkoutPage }) => {
     checkoutPage.clickButton(confirmOrderButtonOnCheckoutPage);
     checkoutPage.checkTextOfSuccessfulOrder();
     I.assertEqual(price + priceWithColor + flatShippingRatePrice + ecoTaxPrice + vatPrice, totalPrice, 'not equal');
-    orderHistory.checkIdOfLastOrder();
-    let lastOrderID = await orderHistory.getOrderIdText();
+    orderHistoryPage.checkIdOfLastOrder();
+    let lastOrderID = await orderHistoryPage.getOrderIdText();
     console.log(lastOrderID);
 }).tag('buy');
