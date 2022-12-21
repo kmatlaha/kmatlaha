@@ -23,9 +23,7 @@ module.exports = {
   totalPriceText: { xpath: '//*[@id="collapse-checkout-confirm"]/div/div[1]/table/tfoot/tr[5]/td[2]' },
   confirmOrderButtonOnCheckoutPage: { xpath: '//*[@id="button-confirm"]' },
   successfulOrderTextForSuccess: 'Your order has been placed!',
-  orderIdText: { xpath: '//*[@id="content"]/div[1]/table/tbody/tr[1]/td[1]' },
-  myAccountButtonOnTopPanel: { xpath: '//*[@id="top-links"]/ul/li/span/span' },
-  orderHistoryButtonInMyAccountDropdown: { xpath: '//*[@id="top-links"]/ul/li/ul/li[2]/a' },
+  
 
   verifyCheckoutPageText() {
     I.see(this.checkoutHeaderText);
@@ -71,16 +69,7 @@ module.exports = {
     return I.parseStringToFloat(await I.grabTextFrom(this.totalPriceText));
   },
 
-  successfulOrderTextCheck() {
+  checkTextOfSuccessfulOrder() {
     I.see(this.successfulOrderTextForSuccess);
-  },
-
-  idOfLastOrderCheck() {
-    I.click(this.myAccountButtonOnTopPanel);
-    I.click(this.orderHistoryButtonInMyAccountDropdown);
-  },
-
-  async getOrderIdText() {
-    return await I.grabTextFrom(this.orderIdText);
   },
 }

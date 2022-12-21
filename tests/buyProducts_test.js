@@ -1,4 +1,5 @@
 
+
 let loginUser = {
     email: 'testkateqa96@gmail.com',
     password: 'Temp1234567890',
@@ -38,9 +39,9 @@ Scenario('buy product', async ({ I, productPage, checkoutPage }) => {
     let totalPrice = await checkoutPage.getTotalPrice();
     console.log(totalPrice);
     checkoutPage.clickButton(confirmOrderButtonOnCheckoutPage);
-    checkoutPage.successfulOrderTextCheck();
+    checkoutPage.checkTextOfSuccessfulOrder();
     I.assertEqual(price + priceWithColor + flatShippingRatePrice + ecoTaxPrice + vatPrice, totalPrice, 'not equal');
-    checkoutPage.idOfLastOrderCheck();
-    let lastOrderID = await checkoutPage.getOrderIdText();
+    orderHistory.checkIdOfLastOrder();
+    let lastOrderID = await orderHistory.getOrderIdText();
     console.log(lastOrderID);
 }).tag('buy');

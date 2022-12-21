@@ -21,7 +21,7 @@ exports.config = {
       waitForNavigation: 'networkidle',
       waitForTimeout: 5000,
     },
-    "ChaiWrapper" : {
+    "ChaiWrapper": {
       "require": "codeceptjs-chai"
     },
   },
@@ -30,7 +30,8 @@ exports.config = {
     "homePage": "./pages/home.js",
     "registerPage": "./pages/register.js",
     "productPage": "./pages/product.js",
-    "checkoutPage": "./pages/checkout.js"
+    "checkoutPage": "./pages/checkout.js",
+    "orderHistoryPage": "./pages/orderHistory.js"
   },
   name: 'kmatlaha'
 }
