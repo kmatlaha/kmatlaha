@@ -1,10 +1,3 @@
-
-productLinks = new DataTable (['link']);
-productLinks.add (['http://opencart.qatestlab.net/index.php?route=product/product&path=31&product_id=40']);
-productLinks.add (['http://opencart.qatestlab.net/index.php?route=product/product&path=31&product_id=43']);
-productLinks.add (['http://opencart.qatestlab.net/index.php?route=product/product&path=31&product_id=47']);
-productLinks.add (['http://opencart.qatestlab.net/index.php?route=product/product&path=31&product_id=74']);
-
 let loginUser = {
     email: 'testkateqa96@gmail.com',
     password: 'Temp1234567890',
@@ -20,9 +13,8 @@ let billingDetails = {
     postcode: 'A1A1A1',
 };
 
-const { getArrayOfProductLinkObjects } = require('../helpers/productLinksGetter');
-const LinksGetter = require('../helpers/productLinksGetter');
-let productLinks2 = LinksGetter.getLinks();
+const productLinks = require('../helpers/productLinksGetter');
+let productLinks2 = productLinks.getLinks();
 console.log(productLinks2);
 
 Feature('buy product');
