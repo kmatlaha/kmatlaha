@@ -43,7 +43,7 @@ module.exports = {
     I.fillField(this.postcodeBillingField, billingDetails.postcode);
   },
 
-  clickButtonsByStepsOnCheckoutForm() {
+  clickButtonsByStepsOnForm() {
     I.click(this.regionStateButton);
     I.click(this.regionSelectorChoice);
     I.click(this.continueOnCheckoutPageButton);
@@ -69,7 +69,7 @@ module.exports = {
     return I.parseStringToFloat(await I.grabTextFrom(this.totalPriceText));
   },
 
-  clickConfirmOrderButtonOnCheckoutPage() {
+  clickConfirmOrderButton() {
     I.click(this.confirmOrderButtonOnCheckoutPage);
   },
 

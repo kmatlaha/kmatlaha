@@ -1,6 +1,3 @@
-const { newBillingAddressButton, confirmOrderButtonOnCheckoutPage } = require("../pages/checkout");
-const orderHistory = require("../pages/orderHistory");
-
 let loginUser = {
     email: 'testkateqa96@gmail.com',
     password: 'Temp1234567890',
@@ -16,12 +13,19 @@ let billingDetails = {
     postcode: 'A1A1A1',
 };
 
+const productLinks = require('../helpers/productLinksGetter');
+let productLinks2 = productLinks.getLinks();
+console.log(productLinks2);
+
 Feature('buy product');
 
-Scenario('buy product', async ({ I, productPage, checkoutPage, orderHistoryPage }) => {
+Before(({I}) => {
     I.login(loginUser);
+});
+
+Data(productLinks2).Scenario('buy product', async ({ I, productPage, checkoutPage, orderHistoryPage, current }) => {
     I.see('My Account');
-    I.amOnPage('http://opencart.qatestlab.net/index.php?route=product/product&path=32&product_id=43');
+    I.amOnPage(current.link);
     let price = await productPage.getProductPrice();
     console.log(price);
     let priceWithColor = await productPage.getProductPriceWithChosenColor();
@@ -30,7 +34,7 @@ Scenario('buy product', async ({ I, productPage, checkoutPage, orderHistoryPage 
     checkoutPage.verifyCheckoutPageText();
     checkoutPage.clickNewBillingAddressButton();
     checkoutPage.fillCheckoutDetails(billingDetails);
-    checkoutPage.clickButtonsByStepsOnCheckoutForm();
+    checkoutPage.clickButtonsByStepsOnForm();
     let flatShippingRatePrice = await checkoutPage.getFlatShippingRatePrice();
     console.log(flatShippingRatePrice);
     let ecoTaxPrice = await checkoutPage.getEcoTaxPrice();
@@ -39,7 +43,7 @@ Scenario('buy product', async ({ I, productPage, checkoutPage, orderHistoryPage 
     console.log(vatPrice);
     let totalPrice = await checkoutPage.getTotalPrice();
     console.log(totalPrice);
-    checkoutPage.clickConfirmOrderButtonOnCheckoutPage();
+    checkoutPage.clickConfirmOrderButton();
     checkoutPage.checkTextOfSuccessfulOrder();
     I.assertEqual(price + priceWithColor + flatShippingRatePrice + ecoTaxPrice + vatPrice, totalPrice, 'not equal');
     orderHistoryPage.checkIdOfLastOrder();
