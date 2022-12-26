@@ -1,6 +1,8 @@
 const { I } = inject();
+const Helper = require('../helpers/helper.js');
 
 module.exports = {
+  productIsNotAvailable: {xpath: '//*[@class="text-danger"]'},
   checkoutHeaderText: 'Checkout',
   newBillingAddressButton: { xpath: '//*[@id="collapse-payment-address"]/div/form/div[3]/label' },
   firstNameBillingField: { css: '#input-payment-firstname' },
@@ -23,7 +25,10 @@ module.exports = {
   totalPriceText: { xpath: '//*[@id="collapse-checkout-confirm"]/div/div[1]/table/tfoot/tr[5]/td[2]' },
   confirmOrderButtonOnCheckoutPage: { xpath: '//*[@id="button-confirm"]' },
   successfulOrderTextForSuccess: 'Your order has been placed!',
-  
+
+  async checkProductIsNotAvailable() {
+    return await Helper.CheckElementIsVisible(this.productIsNotAvailable);
+  },
 
   verifyCheckoutPageText() {
     I.see(this.checkoutHeaderText);

@@ -1,4 +1,5 @@
 const { I } = inject();
+const Helper = require('../helpers/helper.js');
 
 module.exports = {
   priceText: { xpath: '//div[@class="price"]/span[1]' },
@@ -12,10 +13,19 @@ module.exports = {
     return I.parseStringToFloat(await I.grabTextFrom(this.priceText));
   },
 
+  async checkColorForProduct() {
+    return await Helper.CheckElementIsVisible(this.colorPriceButton);
+  },
+
   async getProductPriceWithChosenColor() {
+    let colorForProduct = await this.checkColorForProduct();
+    if (colorForProduct) {
     I.click(this.colorPriceButton);
     I.click(this.colorChoosePress);
     return I.parseStringToFloat(await I.grabTextFrom(this.colorChoosePress));
+    } else {
+      return 0;
+    }
   },
 
   addProductToCart() {

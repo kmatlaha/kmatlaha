@@ -1,4 +1,5 @@
 const { I } = inject();
+const Helper = require('../helpers/helper.js');
 
 module.exports = {
 

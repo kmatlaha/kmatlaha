@@ -19,10 +19,13 @@ exports.config = {
       show: true,
       browser: 'chromium',
       waitForNavigation: 'networkidle',
-      waitForTimeout: 5000,
+      waitForTimeout: 10000,
     },
     "ChaiWrapper": {
       "require": "codeceptjs-chai"
+    },
+    Converter: {
+      require: './helpers/converter_helper.js',
     },
   },
   include: {
@@ -31,7 +34,8 @@ exports.config = {
     "registerPage": "./pages/register.js",
     "productPage": "./pages/product.js",
     "checkoutPage": "./pages/checkout.js",
-    "orderHistoryPage": "./pages/orderHistory.js"
+    "orderHistoryPage": "./pages/orderHistory.js",
+    "helper": "./helpers/helper.js",
   },
   name: 'kmatlaha'
 }
