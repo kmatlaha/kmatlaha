@@ -18,6 +18,7 @@ module.exports = function () {
       this.fillField(emailField, user.email);
       this.fillField(passwordField, user.password);
       this.click(submitButton);
+      this.see('My Account');
     },
   });
 }

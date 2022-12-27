@@ -17,7 +17,7 @@ module.exports = {
   },
 
   async checkCartIsEmpty() {
-    return await Helper.CheckElementIsVisible(this.emptyCartText);
+    return await Helper.checkElementIsVisible(this.emptyCartText);
   },
 
   async emptyCart() {
@@ -25,8 +25,8 @@ module.exports = {
     if (isCartEmpty==false) {
       let attributesArray = await I.grabAttributeFromAll({css: 'i.linearicons-trash'}, 'class');
       console.log("Array size:" + attributesArray.length);
-      for(let i=0 , j = attributesArray.length; i<attributesArray.length; i++ , j--) {
-            I.click({xpath: `(//i[@class="linearicons-trash"])[${j}]`});
+      for(let i=attributesArray.length; i>0; i--) {
+            I.click({xpath: `(//i[@class="linearicons-trash"])[${i}]`});
         };
     }
   },

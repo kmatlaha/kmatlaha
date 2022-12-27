@@ -14,15 +14,13 @@ let billingDetails = {
 };
 
 const productLinks = require('../helpers/productLinksGetter');
-const checkout = require('../pages/checkout');
 let productLinks2 = productLinks.getLinks();
 console.log(productLinks2);
 
 Feature('buy product');
 
-Before(async ({I, helper, homePage}) => {
+Before(async ({I, homePage}) => {
     I.login(loginUser);
-    I.see('My Account');
     homePage.clickCartIcon();
     console.log(await homePage.checkCartIsEmpty());
     await homePage.emptyCart();
@@ -33,7 +31,6 @@ Data(productLinks2).Scenario('buy product', async ({ I, productPage, checkoutPag
     I.amOnPage(current.link);
     let price = await productPage.getProductPrice();
     console.log(price);
-    console.log(await productPage.checkColorForProduct());
     let priceWithColor = await productPage.getProductPriceWithChosenColor();
     console.log(priceWithColor);
     productPage.addProductToCart();

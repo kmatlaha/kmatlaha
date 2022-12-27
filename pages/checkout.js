@@ -27,7 +27,7 @@ module.exports = {
   successfulOrderTextForSuccess: 'Your order has been placed!',
 
   async checkProductIsNotAvailable() {
-    return await Helper.CheckElementIsVisible(this.productIsNotAvailable);
+    return await Helper.checkElementIsVisible(this.productIsNotAvailable);
   },
 
   verifyCheckoutPageText() {

@@ -14,12 +14,11 @@ module.exports = {
   },
 
   async checkColorForProduct() {
-    return await Helper.CheckElementIsVisible(this.colorPriceButton);
+    return await Helper.checkElementIsVisible(this.colorPriceButton);
   },
 
   async getProductPriceWithChosenColor() {
-    let colorForProduct = await this.checkColorForProduct();
-    if (colorForProduct) {
+    if (await Helper.checkElementIsVisible(this.colorPriceButton)) {
     I.click(this.colorPriceButton);
     I.click(this.colorChoosePress);
     return I.parseStringToFloat(await I.grabTextFrom(this.colorChoosePress));
