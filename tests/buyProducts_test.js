@@ -21,8 +21,6 @@ Feature('buy product');
 
 Before(async ({I, homePage}) => {
     I.login(loginUser);
-    homePage.clickCartIcon();
-    console.log(await homePage.checkCartIsEmpty());
     await homePage.emptyCart();
 });
 
@@ -30,9 +28,9 @@ Data(productLinks2).Scenario('buy product', async ({ I, productPage, checkoutPag
     
     I.amOnPage(current.link);
     let price = await productPage.getProductPrice();
-    console.log(price);
+    console.log('Price is: ' + price);
     let priceWithColor = await productPage.getProductPriceWithChosenColor();
-    console.log(priceWithColor);
+    console.log('Price with color is: ' + priceWithColor);
     productPage.addProductToCart();
     let isProductAvailableForPurchase = !(await checkoutPage.checkProductIsNotAvailable());
     if (isProductAvailableForPurchase) {
@@ -41,18 +39,18 @@ Data(productLinks2).Scenario('buy product', async ({ I, productPage, checkoutPag
         checkoutPage.fillCheckoutDetails(billingDetails);
         checkoutPage.clickButtonsByStepsOnForm();
         let flatShippingRatePrice = await checkoutPage.getFlatShippingRatePrice();
-        console.log(flatShippingRatePrice);
+        console.log('Flat shipping rate price is: ' + flatShippingRatePrice);
         let ecoTaxPrice = await checkoutPage.getEcoTaxPrice();
-        console.log(ecoTaxPrice);
+        console.log('Eco tax price is: ' + ecoTaxPrice);
         let vatPrice = await checkoutPage.getVatPrice();
-        console.log(vatPrice);
+        console.log('VAT price is: ' + vatPrice);
         let totalPrice = await checkoutPage.getTotalPrice();
-        console.log(totalPrice);
+        console.log('Total price is: ' + totalPrice);
         checkoutPage.clickConfirmOrderButton();
         checkoutPage.checkTextOfSuccessfulOrder();
         I.assertEqual(price + priceWithColor + flatShippingRatePrice + ecoTaxPrice + vatPrice, totalPrice, 'not equal');
         orderHistoryPage.checkIdOfLastOrder();
         let lastOrderID = await orderHistoryPage.getOrderIdText();
-        console.log(lastOrderID);
+        console.log('Last order ID is: ' + lastOrderID);
     }
 }).tag('buy');
