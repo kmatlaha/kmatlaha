@@ -2,3 +2,5 @@ http://opencart.qatestlab.net/index.php?route=product/product&path=31&product_id
 http://opencart.qatestlab.net/index.php?route=product/product&path=31&product_id=43
 http://opencart.qatestlab.net/index.php?route=product/product&path=31&product_id=47
 http://opencart.qatestlab.net/index.php?route=product/product&path=31&product_id=74
+http://opencart.qatestlab.net/index.php?route=product/product&product_id=68
+http://opencart.qatestlab.net/index.php?route=product/product&path=30&product_id=63

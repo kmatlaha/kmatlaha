@@ -19,34 +19,38 @@ console.log(productLinks2);
 
 Feature('buy product');
 
-Before(({I}) => {
+Before(async ({I, homePage}) => {
     I.login(loginUser);
+    await homePage.emptyCart();
 });
 
 Data(productLinks2).Scenario('buy product', async ({ I, productPage, checkoutPage, orderHistoryPage, current }) => {
-    I.see('My Account');
+    
     I.amOnPage(current.link);
     let price = await productPage.getProductPrice();
-    console.log(price);
+    console.log('Price is: ' + price);
     let priceWithColor = await productPage.getProductPriceWithChosenColor();
-    console.log(priceWithColor);
+    console.log('Price with color is: ' + priceWithColor);
     productPage.addProductToCart();
-    checkoutPage.verifyCheckoutPageText();
-    checkoutPage.clickNewBillingAddressButton();
-    checkoutPage.fillCheckoutDetails(billingDetails);
-    checkoutPage.clickButtonsByStepsOnForm();
-    let flatShippingRatePrice = await checkoutPage.getFlatShippingRatePrice();
-    console.log(flatShippingRatePrice);
-    let ecoTaxPrice = await checkoutPage.getEcoTaxPrice();
-    console.log(ecoTaxPrice);
-    let vatPrice = await checkoutPage.getVatPrice();
-    console.log(vatPrice);
-    let totalPrice = await checkoutPage.getTotalPrice();
-    console.log(totalPrice);
-    checkoutPage.clickConfirmOrderButton();
-    checkoutPage.checkTextOfSuccessfulOrder();
-    I.assertEqual(price + priceWithColor + flatShippingRatePrice + ecoTaxPrice + vatPrice, totalPrice, 'not equal');
-    orderHistoryPage.checkIdOfLastOrder();
-    let lastOrderID = await orderHistoryPage.getOrderIdText();
-    console.log(lastOrderID);
+    let isProductAvailableForPurchase = !(await checkoutPage.checkProductIsNotAvailable());
+    if (isProductAvailableForPurchase) {
+        checkoutPage.verifyCheckoutPageText();
+        checkoutPage.clickNewBillingAddressButton();
+        checkoutPage.fillCheckoutDetails(billingDetails);
+        checkoutPage.clickButtonsByStepsOnForm();
+        let flatShippingRatePrice = await checkoutPage.getFlatShippingRatePrice();
+        console.log('Flat shipping rate price is: ' + flatShippingRatePrice);
+        let ecoTaxPrice = await checkoutPage.getEcoTaxPrice();
+        console.log('Eco tax price is: ' + ecoTaxPrice);
+        let vatPrice = await checkoutPage.getVatPrice();
+        console.log('VAT price is: ' + vatPrice);
+        let totalPrice = await checkoutPage.getTotalPrice();
+        console.log('Total price is: ' + totalPrice);
+        checkoutPage.clickConfirmOrderButton();
+        checkoutPage.checkTextOfSuccessfulOrder();
+        I.assertEqual(price + priceWithColor + flatShippingRatePrice + ecoTaxPrice + vatPrice, totalPrice, 'not equal');
+        orderHistoryPage.checkIdOfLastOrder();
+        let lastOrderID = await orderHistoryPage.getOrderIdText();
+        console.log('Last order ID is: ' + lastOrderID);
+    }
 }).tag('buy');

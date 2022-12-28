@@ -18,10 +18,7 @@ module.exports = function () {
       this.fillField(emailField, user.email);
       this.fillField(passwordField, user.password);
       this.click(submitButton);
-    },
-
-    parseStringToFloat(str) {
-      return parseFloat(str.replaceAll(/[^0-9\.]+/g, ''));
+      this.see('My Account');
     },
   });
 }
