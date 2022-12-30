@@ -32,9 +32,12 @@ exports.config = {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
+      
     },
     JSONResponse: {},
-
+    ConvertCurrency: {
+      require: './helpers/convertCurrency_helper.js',
+    },
   },
   include: {
     "I": "./steps_file.js",

@@ -14,6 +14,7 @@ let billingDetails = {
 };
 
 const productLinks = require('../helpers/productLinksGetter');
+
 let productLinks2 = productLinks.getLinks();
 console.log(productLinks2);
 
@@ -46,12 +47,9 @@ Data(productLinks2).Scenario('buy product', async ({ I, productPage, checkoutPag
         console.log('VAT price is: ' + vatPrice);
         let totalPrice = await checkoutPage.getTotalPrice();
         console.log('Total price is: ' + totalPrice);
-        let response = await I.sendGetRequest('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode=USD&json');
-        I.seeResponseCodeIs(200);
-        console.log('Response is: ' + response.data[0].rate);
-        let usdRate = response.data[0].rate;
+        let usdRate = await I.convertCurrencyTo('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode=USD&json');
         let priceInUah = totalPrice * usdRate;
-        console.log("Price in UAH is: " + +priceInUah.toFixed(2));
+        console.log("Price in UAH is: " + priceInUah.toFixed(2));
         checkoutPage.clickConfirmOrderButton();
         checkoutPage.checkTextOfSuccessfulOrder();
         I.assertEqual(price + priceWithColor + flatShippingRatePrice + ecoTaxPrice + vatPrice, totalPrice, 'not equal');
