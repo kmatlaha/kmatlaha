@@ -47,7 +47,7 @@ Data(productLinks2).Scenario('buy product', async ({ I, productPage, checkoutPag
         console.log('VAT price is: ' + vatPrice);
         let totalPrice = await checkoutPage.getTotalPrice();
         console.log('Total price is: ' + totalPrice);
-        let usdRate = await I.convertCurrencyTo('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode=USD&json');
+        let usdRate = await I.convertUsdToUah();
         let priceInUah = totalPrice * usdRate;
         console.log("Price in UAH is: " + priceInUah.toFixed(2));
         checkoutPage.clickConfirmOrderButton();
