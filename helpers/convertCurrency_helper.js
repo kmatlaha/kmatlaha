@@ -6,7 +6,7 @@ class ConvertCurrency extends Helper {
     const { REST } = this.helpers;
     let response = await REST.sendGetRequest('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?valcode=USD&json');
     JSONResponse.seeResponseCodeIs(200);
-    console.log('Response is: ' + response.data[0].rate);
+    console.log('Response for USD rate is: ' + response.data[0].rate);
     let usdRate = parseFloat(response.data[0].rate);
     return totalPriceInUsd * usdRate;
   }

@@ -46,9 +46,9 @@ Data(productLinks2).Scenario('buy product', async ({ I, productPage, checkoutPag
         let vatPrice = await checkoutPage.getVatPrice();
         console.log('VAT price is: ' + vatPrice);
         let totalPriceInUsd = await checkoutPage.getTotalPrice();
-        console.log('Total price is: ' + totalPriceInUsd);
+        console.log('Total price in USD is: ' + totalPriceInUsd);
         let totalPriceInUah = await I.convertUsdToUah(totalPriceInUsd);
-        console.log("Price in UAH is: " + totalPriceInUah.toFixed(2));
+        console.log("Total price in UAH is: " + totalPriceInUah.toFixed(2));
         checkoutPage.clickConfirmOrderButton();
         checkoutPage.checkTextOfSuccessfulOrder();
         I.assertEqual(price + priceWithColor + flatShippingRatePrice + ecoTaxPrice + vatPrice, totalPriceInUsd, 'not equal');
