@@ -14,6 +14,7 @@ let billingDetails = {
 };
 
 const productLinks = require('../helpers/productLinksGetter');
+
 let productLinks2 = productLinks.getLinks();
 console.log(productLinks2);
 
@@ -44,11 +45,13 @@ Data(productLinks2).Scenario('buy product', async ({ I, productPage, checkoutPag
         console.log('Eco tax price is: ' + ecoTaxPrice);
         let vatPrice = await checkoutPage.getVatPrice();
         console.log('VAT price is: ' + vatPrice);
-        let totalPrice = await checkoutPage.getTotalPrice();
-        console.log('Total price is: ' + totalPrice);
+        let totalPriceInUsd = await checkoutPage.getTotalPrice();
+        console.log('Total price in USD is: ' + totalPriceInUsd);
+        let totalPriceInUah = await I.convertUsdToUah(totalPriceInUsd);
+        console.log("Total price in UAH is: " + totalPriceInUah);
         checkoutPage.clickConfirmOrderButton();
         checkoutPage.checkTextOfSuccessfulOrder();
-        I.assertEqual(price + priceWithColor + flatShippingRatePrice + ecoTaxPrice + vatPrice, totalPrice, 'not equal');
+        I.assertEqual(price + priceWithColor + flatShippingRatePrice + ecoTaxPrice + vatPrice, totalPriceInUsd, 'not equal');
         orderHistoryPage.checkIdOfLastOrder();
         let lastOrderID = await orderHistoryPage.getOrderIdText();
         console.log('Last order ID is: ' + lastOrderID);

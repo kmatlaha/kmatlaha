@@ -27,6 +27,17 @@ exports.config = {
     Converter: {
       require: './helpers/converter_helper.js',
     },
+    REST: {
+      defaultHeaders: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      
+    },
+    JSONResponse: {},
+    ConvertCurrency: {
+      require: './helpers/convertCurrency_helper.js',
+    },
   },
   include: {
     "I": "./steps_file.js",
@@ -37,5 +48,10 @@ exports.config = {
     "orderHistoryPage": "./pages/orderHistory.js",
     "helper": "./helpers/helper.js",
   },
-  name: 'kmatlaha'
+  name: 'kmatlaha',
+  "mocha": {
+    "reporterOptions": {
+        "reportDir": "output"
+    }
+  },
 }
