@@ -48,7 +48,7 @@ Data(productLinks2).Scenario('buy product', async ({ I, productPage, checkoutPag
         let totalPriceInUsd = await checkoutPage.getTotalPrice();
         console.log('Total price in USD is: ' + totalPriceInUsd);
         let totalPriceInUah = await I.convertUsdToUah(totalPriceInUsd);
-        console.log("Total price in UAH is: " + totalPriceInUah.toFixed(2));
+        console.log("Total price in UAH is: " + totalPriceInUah);
         checkoutPage.clickConfirmOrderButton();
         checkoutPage.checkTextOfSuccessfulOrder();
         I.assertEqual(price + priceWithColor + flatShippingRatePrice + ecoTaxPrice + vatPrice, totalPriceInUsd, 'not equal');

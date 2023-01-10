@@ -8,7 +8,7 @@ class ConvertCurrency extends Helper {
     JSONResponse.seeResponseCodeIs(200);
     console.log('Response for USD rate is: ' + response.data[0].rate);
     let usdRate = parseFloat(response.data[0].rate);
-    return totalPriceInUsd * usdRate;
+    return (totalPriceInUsd * usdRate).toFixed(2);
   }
 }
 module.exports = ConvertCurrency;
